@@ -22,7 +22,8 @@ export class AppComponent implements OnInit {
     'group',
     'description',
   ];
-  employeeList: Employee[] = [];
+  employeeListAll: Employee[] = [];
+  employeeListView: Employee[] = []
 
   //Pagination
   length = 50;
@@ -38,7 +39,7 @@ export class AppComponent implements OnInit {
   pageEvent: PageEvent = new PageEvent();
 
   ngOnInit(): void {
-    this.employeeList = this.employeeService.generateEmployees();
+    this.employeeListAll = this.employeeService.generateEmployees();
   }
 
   handlePageEvent(e: PageEvent) {
