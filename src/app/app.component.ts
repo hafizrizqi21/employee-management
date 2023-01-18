@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import Employee from './services/employee.model';
+import { Store } from '@ngrx/store';
 import { EmployeeService } from './services/employee.service';
-import { PageEvent } from '@angular/material/paginator';
+import { AppState } from './store/app.state';
+import { generateEmployee } from './store/employee/employee.actions';
 
 @Component({
   selector: 'app-root',
@@ -9,51 +10,12 @@ import { PageEvent } from '@angular/material/paginator';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  constructor(private employeeService: EmployeeService) {}
-
-  title = 'employee-management';
-  displayedColumns: string[] = [
-    'username',
-    'name',
-    'email',
-    'birthDate',
-    'basicSalary',
-    'status',
-    'group',
-    'description',
-  ];
-  employeeListAll: Employee[] = [];
-  employeeListView: Employee[] = []
-
-  //Pagination
-  length = 50;
-  pageSize = 10;
-  pageIndex = 0;
-  pageSizeOptions = [5, 10, 25];
-
-  hidePageSize = false;
-  showPageSizeOptions = true;
-  showFirstLastButtons = true;
-  disabled = false;
-
-  pageEvent: PageEvent = new PageEvent();
-
+  constructor(
+    private employeeService: EmployeeService,
+    private store: Store<AppState>
+  ) {}
   ngOnInit(): void {
-    this.employeeListAll = this.employeeService.generateEmployees();
-  }
-
-  handlePageEvent(e: PageEvent) {
-    this.pageEvent = e;
-    this.length = e.length;
-    this.pageSize = e.pageSize;
-    this.pageIndex = e.pageIndex;
-  }
-
-  setSizePageOptions(setSizePageOptionsInput: string) {
-    if (setSizePageOptionsInput) {
-      this.pageSizeOptions = setSizePageOptionsInput
-        .split(',')
-        .map((str) => +str);
-    }
+    const res = this.employeeService.generateEmployees();
+    this.store.dispatch(generateEmployee({ employeeList: res }));
   }
 }

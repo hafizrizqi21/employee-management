@@ -1,0 +1,23 @@
+<div>
+    <form [formGroup]='employeeInput' class="form" (ngSubmit)='submit()'>
+        <div *ngFor="let f of fieldList">
+            <mat-form-field>
+                <mat-label>{{f.label}}</mat-label>
+
+                <mat-select *ngIf="f.type === 'select';else textinput" [formControlName]='f.name' class="form-control">
+                    <mat-option *ngFor="let opt of f.options" [value]="opt">
+                        {{opt}}
+                    </mat-option>
+                </mat-select>
+                <ng-template #textinput>
+                    <input [formControlName]='f.name' [type]='f.type' class="form-control" [placeholder]="f.placeholder"
+                        matInput>
+                </ng-template>
+            </mat-form-field>
+        </div>
+        <div>
+            <button mat-raised-button color="secondary" type="button" routerLink="/">Back</button>
+            <button mat-raised-button color="primary" type="submit">Submit</button>
+        </div>
+    </form>
+</div>
