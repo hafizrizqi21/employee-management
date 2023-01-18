@@ -1,1 +1,20 @@
-<p>login works!</p>
+<form [formGroup]="authInput" (submit)="submit()">
+    <div>
+        <mat-form-field>
+            <mat-label>Ussername</mat-label>
+            <input formControlName='username' type="text" class="form-control" placeholder="Username" matInput>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input formControlName='password' type="text" class="form-control" placeholder="password" matInput>
+        </mat-form-field>
+    </div>
+    <div *ngIf="errorMsg" style="color: red;">
+        {{errorMsg}}
+    </div>
+    <div>
+        <button mat-raised-button color="secondary" type="button" routerLink="/">Back</button>
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+    </div>
+</form>
