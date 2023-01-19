@@ -71,6 +71,7 @@ export class EmployeeFormComponent implements OnInit {
   ];
 
   employeeInput: FormGroup;
+  submitted: boolean = false
 
   constructor(
     private store: Store<AppState>,
@@ -115,6 +116,7 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   submit() {
+    this.submitted = true
     if (this.employeeInput.status === 'VALID') {
       const employee: Employee = this.employeeInput.value;
       employee.birthDate = new Date(employee.birthDate).toLocaleDateString();

@@ -4,6 +4,7 @@ import { select, Store } from '@ngrx/store';
 import { AppState } from '../store/app.state';
 import { lastValueFrom, take } from 'rxjs';
 import { selectAllEmployee } from '../store/employee/employee.selectors';
+import { formatNominal } from '../utils';
 
 @Component({
   selector: 'app-employee-detail',
@@ -41,5 +42,8 @@ export class EmployeeDetailComponent implements OnInit {
         name: `${res.firstName} ${res.lastName}` 
       }
     }
+  }
+  formatSalary(value: number) {
+    return formatNominal(value);
   }
 }

@@ -1,5 +1,9 @@
 <div class="container pt-4">
-  <form [formGroup]="employeeInput" class="form" (ngSubmit)="submit()">
+  <form
+    [formGroup]="employeeInput"
+    class="needs-validation"
+    (ngSubmit)="submit()"
+  >
     <div class="row py-2" *ngFor="let f of fieldList">
       <div class="col">
         <label [for]="f.name">{{ f.label }}</label>
@@ -7,6 +11,9 @@
           *ngIf="f.type === 'select'; else textinput"
           [formControlName]="f.name"
           class="form-control"
+          [ngClass]="{
+            'is-invalid': submitted && employeeInput.controls[f.name].errors
+          }"
         >
           <option
             class="form-control"
@@ -24,6 +31,9 @@
             [type]="f.type"
             class="form-control"
             [placeholder]="f.placeholder"
+            [ngClass]="{
+              'is-invalid': submitted && employeeInput.controls[f.name].errors
+            }"
           />
         </ng-template>
       </div>

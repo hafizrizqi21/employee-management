@@ -33,5 +33,8 @@ export class LoginComponent {
         this.errorMsg = 'Wrong username or password';
       }
     }
+    else {
+      this.errorMsg = 'Username and password must be filled'
+    }
   }
 }

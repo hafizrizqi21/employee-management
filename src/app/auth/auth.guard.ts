@@ -14,10 +14,10 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot):boolean {
       console.log('CanActivate called');
-    let isLoggedIn: boolean = true
-    // this.store.pipe(select(selectIsLoggedIn), take(1)).subscribe(
-    //   s => isLoggedIn = s
-    // );
+    let isLoggedIn: boolean = false
+    this.store.pipe(select(selectIsLoggedIn), take(1)).subscribe(
+      s => isLoggedIn = s
+    );
     console.log(isLoggedIn)
     if (isLoggedIn){
       return true
