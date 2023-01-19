@@ -1,23 +1,47 @@
-<div>
-    <form [formGroup]='employeeInput' class="form" (ngSubmit)='submit()'>
-        <div *ngFor="let f of fieldList">
-            <mat-form-field>
-                <mat-label>{{f.label}}</mat-label>
-
-                <mat-select *ngIf="f.type === 'select';else textinput" [formControlName]='f.name' class="form-control">
-                    <mat-option *ngFor="let opt of f.options" [value]="opt">
-                        {{opt}}
-                    </mat-option>
-                </mat-select>
-                <ng-template #textinput>
-                    <input [formControlName]='f.name' [type]='f.type' class="form-control" [placeholder]="f.placeholder"
-                        matInput>
-                </ng-template>
-            </mat-form-field>
-        </div>
-        <div>
-            <button mat-raised-button color="secondary" type="button" routerLink="/">Back</button>
-            <button mat-raised-button color="primary" type="submit">Submit</button>
-        </div>
-    </form>
+<div class="container pt-4">
+  <form [formGroup]="employeeInput" class="form" (ngSubmit)="submit()">
+    <div class="row py-2" *ngFor="let f of fieldList">
+      <div class="col">
+        <label [for]="f.name">{{ f.label }}</label>
+        <select
+          *ngIf="f.type === 'select'; else textinput"
+          [formControlName]="f.name"
+          class="form-control"
+        >
+          <option
+            class="form-control"
+            [id]="f.name"
+            *ngFor="let opt of f.options"
+            [value]="opt"
+          >
+            {{ opt }}
+          </option>
+        </select>
+        <ng-template #textinput>
+          <input
+            [id]="f.name"
+            [formControlName]="f.name"
+            [type]="f.type"
+            class="form-control"
+            [placeholder]="f.placeholder"
+          />
+        </ng-template>
+      </div>
+    </div>
+    <div class="row justify-content-end py-4">
+      <div class="col-12 col-sm-6 col-md-2 py-2">
+        <button
+          class="btn btn-secondary w-100"
+          type="button"
+          style="display: block"
+          routerLink="/"
+        >
+          Back
+        </button>
+      </div>
+      <div class="col-12 col-sm-6 col-md-2 py-2">
+        <button class="btn btn-primary w-100" type="submit">Submit</button>
+      </div>
+    </div>
+  </form>
 </div>

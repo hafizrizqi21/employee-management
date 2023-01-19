@@ -45,11 +45,11 @@ export class EmployeeComponent implements OnInit {
     'username',
     'name',
     'email',
-    'birthDate',
-    'basicSalary',
+    // 'birthDate',
+    // 'basicSalary',
     'status',
     'group',
-    'description',
+    // 'description',
     'actions',
   ];
   employeeListView: Employee[] = [];
@@ -90,6 +90,10 @@ export class EmployeeComponent implements OnInit {
 
   onFilter(e: any) {
     this.store.dispatch(setFilter({ filter: e.target.value }));
+  }
+
+  onView(employee: Employee) {
+    this.router.navigate(['/employee-detail', employee.id]);
   }
 
   onEdit(employee: Employee) {

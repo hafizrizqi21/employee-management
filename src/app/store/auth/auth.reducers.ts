@@ -9,7 +9,7 @@ export const initialState: AuthState = {
   isLoggedIn: false,
 };
 
-export const auth = createReducer(
+export const authReducer = createReducer(
   initialState,
   on(login, (state) => {
     return { ...state, isLoggedIn: true };

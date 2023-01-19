@@ -1,4 +1,3 @@
-import { Routes, RouterModule } from '@angular/router';
 import { employeeReducer } from './store/employee/employee.reducers';
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,13 +22,9 @@ import { EmployeeComponent } from './employee/employee.component';
 import { EmployeeFormComponent } from './employee-form/employee-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogComponent } from './shared/dialog/dialog.component';
-
-const routes: Routes = [
-  { path: '', component: EmployeeComponent },
-  { path: 'employee-form', component: EmployeeFormComponent },
-  { path: 'employee-form/:id', component: EmployeeFormComponent },
-  { path: 'login', component: LoginComponent },
-];
+import { authReducer } from './store/auth/auth.reducers';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { EmployeeDetailComponent } from './employee-detail/employee-detail.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +33,8 @@ const routes: Routes = [
     EmployeeComponent,
     EmployeeFormComponent,
     DialogComponent,
+    NavbarComponent,
+    EmployeeDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,10 +49,10 @@ const routes: Routes = [
     MatPaginatorModule,
     MatIconModule,
     MatDialogModule,
-    StoreModule.forRoot({ employee: employeeReducer }),
+    StoreModule.forRoot({ employee: employeeReducer, auth: authReducer }),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    RouterModule.forRoot(routes),
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { EmployeeService } from './services/employee.service';
 import { AppState } from './store/app.state';
+import { selectIsLoggedIn } from './store/auth/auth.selectors';
 import { generateEmployee } from './store/employee/employee.actions';
 
 @Component({
@@ -10,6 +11,7 @@ import { generateEmployee } from './store/employee/employee.actions';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+  isLoggedIn$ = this.store.select(selectIsLoggedIn)
   constructor(
     private employeeService: EmployeeService,
     private store: Store<AppState>
